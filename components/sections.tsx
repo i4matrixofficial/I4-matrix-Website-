@@ -151,9 +151,9 @@ export function ProjectsShowcase({ full = false }: { full?: boolean }) {
   return (
     <section className="py-20">
       <div className="container">
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div className={cn("flex flex-col gap-5", full && "md:flex-row md:items-end md:justify-between")}>
           <SectionHeading
-            align="left"
+            align={full ? "left" : "center"}
             eyebrow="Projects"
             title={full ? "Premium project showcase" : "Featured platforms shaped for real operations"}
             text="A concise view of tourism, transport, and custom product work from the i4Matrix delivery portfolio."
@@ -290,15 +290,54 @@ export function CtaSection() {
     <section className="py-20">
       <div className="container">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[2rem] border bg-slate-950 px-6 py-14 text-white shadow-premium sm:px-10 lg:px-16">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,.35),transparent_35%),radial-gradient(circle_at_80%_40%,rgba(124,58,237,.35),transparent_32%)]" />
-            <div className="relative max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-300">Start with clarity</p>
-              <h2 className="mt-4 text-balance text-3xl font-bold sm:text-5xl">Build the software platform your company actually needs next.</h2>
-              <p className="mt-5 max-w-2xl leading-8 text-slate-300">Share the workflow, product idea, or legacy system you want to improve. i4Matrix can shape it into a practical technical roadmap.</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button href="/contact" size="lg">Contact i4Matrix <Send className="size-4" /></Button>
-                <Button href="/services" variant="outline" size="lg" className="border-white/20 bg-white/5 text-white hover:bg-white/10">Explore Services</Button>
+          <div className="relative overflow-hidden rounded-[2rem] border bg-card px-6 py-14 text-card-foreground shadow-premium sm:px-10 lg:px-16 dark:border-transparent dark:bg-slate-950 dark:text-white">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,.16),transparent_35%),radial-gradient(circle_at_80%_40%,rgba(124,58,237,.14),transparent_32%)] dark:bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,.35),transparent_35%),radial-gradient(circle_at_80%_40%,rgba(124,58,237,.35),transparent_32%)]" />
+            <div className="relative grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary dark:text-cyan-300">Start with clarity</p>
+                <h2 className="mt-4 text-balance text-3xl font-bold sm:text-5xl">Build the software platform your company actually needs next.</h2>
+                <p className="mt-5 max-w-2xl leading-8 text-muted-foreground dark:text-slate-300">Share the workflow, product idea, or legacy system you want to improve. i4Matrix can shape it into a practical technical roadmap.</p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Button href="/contact" size="lg">Contact i4Matrix <Send className="size-4" /></Button>
+                  <Button
+                    href="/services"
+                    variant="outline"
+                    size="lg"
+                    className="border-border bg-background text-foreground hover:bg-muted dark:border-white/20 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                  >
+                    Explore Services
+                  </Button>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="relative aspect-[1.15] overflow-hidden rounded-[1.6rem] border border-border/70 bg-muted/40 shadow-[0_20px_45px_rgba(2,6,23,.16)]">
+                  <Image
+                    src="/images/demo9.png"
+                    alt="AI concept visualization"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(56,189,248,.28),transparent_35%),radial-gradient(circle_at_80%_75%,rgba(124,58,237,.28),transparent_34%)]" />
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/45 to-transparent" />
+                </div>
+
+                <motion.div
+                  className="absolute -left-3 top-5 rounded-xl border border-white/35 bg-white/70 px-3 py-2 text-xs font-semibold text-slate-700 shadow-lg backdrop-blur dark:border-white/20 dark:bg-slate-900/70 dark:text-slate-100"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  AI-ready Architecture
+                </motion.div>
+
+                <motion.div
+                  className="absolute -bottom-3 right-4 rounded-xl border border-primary/30 bg-primary/15 px-3 py-2 text-xs font-semibold text-primary backdrop-blur"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                >
+                  Smart delivery pipeline
+                </motion.div>
               </div>
             </div>
           </div>
