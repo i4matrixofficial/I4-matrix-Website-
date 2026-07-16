@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "About", description: "Learn about i4
 export default function AboutPage() {
   return (
     <>
-      <section className="pt-28 sm:pt-32 lg:pt-36">
+      <section className="pt-8 sm:pt-10 lg:pt-12">
         <div className="container">
           <SectionHeading eyebrow="About i4Matrix" title="A premium software company shaped around clarity, speed, and product quality" text="i4Matrix helps businesses replace fragmented operations with elegant digital systems that are easier to run, improve, and scale." />
           <div className="mt-12 grid gap-5 lg:grid-cols-3">

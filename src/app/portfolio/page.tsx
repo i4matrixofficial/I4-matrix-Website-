@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Portfolio", description: "Explore i4
 export default function PortfolioPage() {
   return (
     <>
-      <section className="pt-28 sm:pt-32 lg:pt-36">
+      <section className="pt-8 sm:pt-10 lg:pt-12">
         <div className="container">
           <div className="mx-auto max-w-4xl text-center">
             <p className="inline-flex rounded-full border bg-background/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">Portfolio</p>

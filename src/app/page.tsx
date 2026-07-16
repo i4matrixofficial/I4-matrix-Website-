@@ -7,7 +7,7 @@ import { CtaSection, ProjectsShowcase, ServicesGrid, Strengths, TeamPreview, Tes
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden pb-20 pt-24 sm:pt-28 lg:pt-32">
+      <section className="relative overflow-hidden pb-20 pt-3 sm:pt-5 lg:pt-7">
         <FloatingOrb className="-left-20 top-24 size-72 bg-cyan-400/25 sm:left-10" />
         <FloatingOrb className="-right-24 top-44 size-80 bg-violet-500/20 sm:right-10" />
         <div className="container relative">

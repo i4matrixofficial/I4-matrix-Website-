@@ -8,7 +8,7 @@ const groups = ["Management Team", "Developers", "Designers", "Business Analysts
 
 export default function TeamPage() {
   return (
-    <section className="pb-20 pt-28 sm:pt-32 lg:pt-36">
+    <section className="pb-20 pt-8 sm:pt-10 lg:pt-12">
       <div className="container">
         <SectionHeading eyebrow="Team" title="Product-minded specialists across strategy, design, engineering, and analysis" text="A focused team structure keeps decisions close to the product and delivery quality high." />
         <div className="mt-14 space-y-16">

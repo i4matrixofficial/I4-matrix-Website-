@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Briefcase, Check, Filter, Send, UploadCloud } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -26,18 +26,46 @@ import {
 import { cn } from "@/lib/utils";
 
 export function TrustedCompanies() {
+  const reducedMotion = useReducedMotion();
+
+  const BrandRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
+    <div className="flex shrink-0 items-center gap-4 pr-4" aria-hidden={ariaHidden}>
+      {companies.map((company) => (
+        <div key={company} className="shrink-0 rounded-2xl border bg-card/60 px-4 py-5 text-center text-sm font-semibold text-muted-foreground backdrop-blur">
+          {company}
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <section className="py-12">
       <div className="container">
         <Reveal>
           <p className="text-center text-sm font-medium text-muted-foreground">Trusted company placeholders for enterprise credibility</p>
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {companies.map((company) => (
-              <div key={company} className="rounded-2xl border bg-card/60 px-4 py-5 text-center text-sm font-semibold text-muted-foreground backdrop-blur">
-                {company}
-              </div>
-            ))}
-          </div>
+          {reducedMotion ? (
+            <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+              {companies.map((company) => (
+                <div key={company} className="rounded-2xl border bg-card/60 px-4 py-5 text-center text-sm font-semibold text-muted-foreground backdrop-blur">
+                  {company}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+              <motion.div
+                className="flex w-max items-center"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 26, ease: "linear", repeat: Infinity }}
+                style={{ willChange: "transform" }}
+              >
+                <BrandRow />
+                <BrandRow ariaHidden />
+                <BrandRow ariaHidden />
+                <BrandRow ariaHidden />
+              </motion.div>
+            </div>
+          )}
         </Reveal>
       </div>
     </section>
@@ -56,27 +84,61 @@ export function ServicesGrid({ detailed = false }: { detailed?: boolean }) {
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => (
             <Reveal key={service.title} delay={index * 0.04}>
-              <Card className="group h-full p-6 hover:-translate-y-1 hover:border-primary/50 hover:shadow-premium">
-                <div className="mb-6 grid size-12 place-items-center rounded-2xl bg-primary/10 text-primary transition group-hover:scale-110">
-                  <service.icon className="size-6" />
-                </div>
-                <h3 className="text-xl font-bold">{service.title}</h3>
-                <p className="mt-3 leading-7 text-muted-foreground">{service.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {service.technologies.map((tech) => (
-                    <span key={tech} className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">{tech}</span>
-                  ))}
-                </div>
-                {detailed && (
-                  <div className="mt-6 space-y-3 border-t pt-5">
-                    {service.benefits.map((benefit) => (
-                      <p key={benefit} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Check className="size-4 text-primary" /> {benefit}
-                      </p>
-                    ))}
+              <div className="group relative h-full overflow-hidden rounded-3xl">
+                <Card className="relative h-full border border-border/80 p-6 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-primary/50 group-hover:shadow-[0_0_0_1px_rgba(56,189,248,.24),0_14px_34px_rgba(56,189,248,.16)] group-hover:text-white">
+                  {/* Subtle branded gradient inside card on hover */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(56,189,248,.28),transparent_45%),radial-gradient(circle_at_85%_85%,rgba(124,58,237,.22),transparent_40%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-violet-500/0 transition-colors duration-500 group-hover:from-cyan-500/70 group-hover:via-sky-500/55 group-hover:to-violet-500/70" />
+
+                  <div className="relative">
+                    {/* Icon square — gradient border + glass fill appears on hover */}
+                    <div
+                      className={cn(
+                        "relative mb-6 inline-flex size-14 items-center justify-center rounded-2xl",
+                        "border border-primary/15 bg-primary/10 transition-all duration-500",
+                        "group-hover:border-white/50 group-hover:bg-white/10 group-hover:shadow-[0_0_0_1px_rgba(255,255,255,.15)_inset,0_8px_24px_rgba(0,0,0,.15)] group-hover:backdrop-blur-md",
+                      )}
+                    >
+                      <div className="absolute inset-0 scale-150 rounded-full bg-primary/25 blur-xl transition-opacity duration-500 group-hover:opacity-0" />
+                      <service.icon className="relative size-6 text-primary transition-colors duration-500 group-hover:text-white" />
+                    </div>
+
+                    <h3 className="text-xl font-bold">{service.title}</h3>
+                    <p className="mt-3 leading-7 text-muted-foreground transition-colors duration-500 group-hover:text-white/85">
+                      {service.description}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {service.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground transition-colors duration-500 group-hover:bg-white/15 group-hover:text-white"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    {detailed && (
+                      <div className="mt-6 space-y-3 border-t pt-5 transition-colors duration-500 group-hover:border-white/20">
+                        {service.benefits.map((benefit) => (
+                          <p key={benefit} className="flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-500 group-hover:text-white/85">
+                            <Check className="size-4 text-primary transition-colors duration-500 group-hover:text-white" /> {benefit}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* CTA that slides up on hover */}
+                    <div className="mt-5 max-h-0 overflow-hidden opacity-0 transition-all duration-500 group-hover:mt-5 group-hover:max-h-12 group-hover:opacity-100">
+                      <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-white/90"
+                      >
+                        Talk With Us <ArrowRight className="size-3.5" />
+                      </a>
+                    </div>
                   </div>
-                )}
-              </Card>
+                </Card>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -143,11 +205,16 @@ export function Strengths() {
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {strengths.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.04}>
-              <Card className="p-6">
-                <item.icon className="size-7 text-primary" />
-                <h3 className="mt-5 text-lg font-bold">{item.title}</h3>
-                <p className="mt-3 leading-7 text-muted-foreground">{item.text}</p>
-              </Card>
+              <div className="group relative h-full overflow-hidden rounded-3xl">
+                <Card className="relative h-full border border-border/80 p-6 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-primary/45 group-hover:shadow-[0_0_0_1px_rgba(56,189,248,.2),0_12px_30px_rgba(56,189,248,.12)]">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(56,189,248,.16),transparent_48%),radial-gradient(circle_at_85%_85%,rgba(124,58,237,.14),transparent_44%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative">
+                    <item.icon className="size-7 text-primary transition-colors duration-500 group-hover:text-sky-500" />
+                    <h3 className="mt-5 text-lg font-bold">{item.title}</h3>
+                    <p className="mt-3 leading-7 text-muted-foreground transition-colors duration-500 group-hover:text-foreground/90">{item.text}</p>
+                  </div>
+                </Card>
+              </div>
             </Reveal>
           ))}
         </div>

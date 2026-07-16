@@ -31,8 +31,8 @@ export function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55 }}
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition-all duration-300",
-          scrolled ? "glass shadow-premium" : "border-white/10 bg-background/20 backdrop-blur-xl",
+          "glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-4 py-3 transition-all duration-300",
+          scrolled && "shadow-premium",
         )}
       >
         <Link href="/" className="flex items-center gap-3 font-bold tracking-tight">
@@ -82,7 +82,7 @@ export function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mx-auto mt-3 max-w-7xl rounded-3xl border bg-background/95 p-3 shadow-premium backdrop-blur lg:hidden"
+          className="glass mx-auto mt-3 max-w-7xl rounded-3xl p-3 shadow-premium lg:hidden"
         >
           {navItems.map((item) => (
             <Link

@@ -20,7 +20,7 @@ export function SectionHeading({
   return (
     <Reveal className={cn(wrapperClass)}>
       {eyebrow && (
-        <p className="mb-4 inline-flex rounded-full border bg-background/60 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-primary">
           {eyebrow}
         </p>
       )}

@@ -8,6 +8,7 @@ import {
   DatabaseZap,
   Figma,
   GraduationCap,
+  LayoutDashboard,
   Layers3,
   LockKeyhole,
   Map,
@@ -18,6 +19,7 @@ import {
   Sparkles,
   UsersRound,
   Workflow,
+  Wrench,
 } from "lucide-react";
 
 export const navItems = [
@@ -81,6 +83,20 @@ export const services = [
     description: "Cloud deployment, monitoring, storage, and infrastructure planning for resilient digital products.",
     technologies: ["AWS", "Vercel", "Docker", "CI/CD"],
     benefits: ["High availability", "Automated releases", "Cost control"],
+  },
+  {
+    title: "Admin Panel Development",
+    icon: LayoutDashboard,
+    description: "Custom internal dashboards and control panels that give teams clear visibility and fast operational control.",
+    technologies: ["React", "Role-based Access", "Analytics", "Data Tables"],
+    benefits: ["Faster operations", "Clear permissions", "Real-time data"],
+  },
+  {
+    title: "DevOps & Maintenance",
+    icon: Wrench,
+    description: "Ongoing monitoring, updates, and infrastructure support that keeps production systems fast and stable.",
+    technologies: ["CI/CD", "Monitoring", "Backups", "Version Control"],
+    benefits: ["Fewer outages", "Faster fixes", "Long-term stability"],
   },
 ];
 
